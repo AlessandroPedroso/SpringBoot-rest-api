@@ -1,5 +1,6 @@
 package br.com.springboot.curso_jdev_treinamento.controllers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,5 +103,25 @@ public class GreetingsController {
     	return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     	
     }
+    
+    @GetMapping(value = "buscarPorNome") /*mapeia a URL*/
+    @ResponseBody /*descrição da reposta*/
+    public ResponseEntity<?> buscarPorNome (@RequestParam(name = "name") String name){ /*recebe os dados para salvar*/
+    	
+    	List<Usuario> listUsuario = usuarioRepository.buscarPorNome(name.trim().toUpperCase());/*remove os espaços com trim e define também a busca por minusculo e maiusculo*/
+    	
+    	Iterator<Usuario> iteratorListUsuario = listUsuario.iterator();
+    	
+    	if(iteratorListUsuario.hasNext() == false) { /*Se não encontrar o resultado informa que não existe a busca*/
+    		
+    		return new ResponseEntity<String>("Objeto não encontrado!", HttpStatus.FOUND);
+    		
+    	}else {
+    		return new ResponseEntity<List<Usuario>>(listUsuario, HttpStatus.OK);
+    	}
+    	 	 
+    	
+    }
+    
     
 } 
