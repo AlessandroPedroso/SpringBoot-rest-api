@@ -114,7 +114,7 @@ public class GreetingsController {
     	
     	if(iteratorListUsuario.hasNext() == false) { /*Se não encontrar o resultado informa que não existe a busca*/
     		
-    		return new ResponseEntity<String>("Objeto não encontrado!", HttpStatus.FOUND);
+    		return new ResponseEntity<String>("Usuário não encontrado!", HttpStatus.FOUND);
     		
     	}else {
     		return new ResponseEntity<List<Usuario>>(listUsuario, HttpStatus.OK);
